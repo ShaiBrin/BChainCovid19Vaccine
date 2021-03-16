@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "92331576708",
+    "project_id": "blockchain-project-88dde",
+    "storage_bucket": "blockchain-project-88dde.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92331576708:android:387861e939f46b0671e1d1",
+        "android_client_info": {
+          "package_name": "com.log450.bchainvoteversion1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "92331576708-83q3ub3f9c5irlberq6ja14fb3jsp9ab.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJlMyN0WhuN8Xo29XCHpHaLFurW7tCHss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "92331576708-83q3ub3f9c5irlberq6ja14fb3jsp9ab.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
