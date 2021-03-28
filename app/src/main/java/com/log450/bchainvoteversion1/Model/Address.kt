@@ -1,6 +1,6 @@
-package com.log450.bchainvoteversion1
+package com.log450.bchainvoteversion1.Model
 
-data class Address(
+class Address(
         private val streetNumber: Number,
         private val streetName: String,
         private val city: String,
