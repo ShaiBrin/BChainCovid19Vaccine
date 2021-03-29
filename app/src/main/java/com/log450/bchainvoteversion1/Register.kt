@@ -14,6 +14,7 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.log450.bchainvoteversion1.Repository.Blockchain
 
 class Register : AppCompatActivity() {
 
@@ -44,10 +45,25 @@ class Register : AppCompatActivity() {
         registerBtn.setOnClickListener {
             validateCredentials()
             createUserWithKey()
+            createBlockchain()
         }
 
     }
 
+    private fun createBlockchain(){
+        val docRef = fbase.collection("blockchain").document("1")
+        docRef.get().addOnSuccessListener {
+                document ->
+            if(!document.exists()){
+                Toast.makeText(this, "Does not exists", Toast.LENGTH_LONG).show()
+                Blockchain
+            }
+            else{
+                Toast.makeText(this, "Already exists", Toast.LENGTH_LONG).show()
+            }
+        }
+
+    }
     private fun validateCredentials() {
         email = mEmail.text.toString().trim()
         password = mPassword.text.toString().trim()
@@ -87,11 +103,11 @@ class Register : AppCompatActivity() {
                                         .update("authenticationKey", "true")
                                 }
                             }
-                        Toast.makeText(
-                            this@Register,
-                            "Successfully Registered",
-                            Toast.LENGTH_LONG
-                        ).show()
+                        //Toast.makeText(
+                          //  this@Register,
+                            //"Successfully Registered",
+                            //Toast.LENGTH_LONG
+                        //).show()
                         val intent = Intent(this@Register, Vote::class.java)
                         startActivity(intent)
                         finish()
@@ -100,12 +116,12 @@ class Register : AppCompatActivity() {
 
 
                     else {
-                        Toast.makeText(
-                            this@Register,
-                            "Registration failed",
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
+                        //Toast.makeText(
+                          //  this@Register,
+                            //"Registration failed",
+                            //Toast.LENGTH_LONG
+                        //)
+                          //  .show()
                     }
                 }
             }
