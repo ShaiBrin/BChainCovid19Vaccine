@@ -35,9 +35,6 @@ class Vote : AppCompatActivity() {
             intent.putExtra(EXTRA_STUDENT,  radioBtn.text.toString());
             startActivity(intent)
             finish()
-           // val block  =  Block("", radioBtn.text as String);
-           // fbase.collection("blockchain").document("1").set(block)
-           // Log.d("Block", block.getHash());
         }
 
     }

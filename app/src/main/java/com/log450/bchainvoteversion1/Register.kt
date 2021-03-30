@@ -45,25 +45,10 @@ class Register : AppCompatActivity() {
         registerBtn.setOnClickListener {
             validateCredentials()
             createUserWithKey()
-            createBlockchain()
         }
-
     }
 
-    private fun createBlockchain(){
-        val docRef = fbase.collection("blockchain").document("1")
-        docRef.get().addOnSuccessListener {
-                document ->
-            if(!document.exists()){
-                Toast.makeText(this, "Does not exists", Toast.LENGTH_LONG).show()
-                Blockchain
-            }
-            else{
-                Toast.makeText(this, "Already exists", Toast.LENGTH_LONG).show()
-            }
-        }
 
-    }
     private fun validateCredentials() {
         email = mEmail.text.toString().trim()
         password = mPassword.text.toString().trim()
@@ -90,8 +75,8 @@ class Register : AppCompatActivity() {
 
                 for (document in result) {
 
-                    if (authenticationKey == document.get("publicKey")
-                            .toString() && document.get("authenticationKey") == false
+                    if (authenticationKey == document.get("authenticationKey")
+                            .toString() && document.get("authenticated") == false
                     ) {
 
                         fauth.createUserWithEmailAndPassword(email, password)
@@ -100,14 +85,14 @@ class Register : AppCompatActivity() {
                                 if (task.isSuccessful) {
                                     fbase.collection("people")
                                         .document(document.get("id").toString())
-                                        .update("authenticationKey", "true")
+                                        .update("authenticated", "true")
                                 }
                             }
-                        //Toast.makeText(
-                          //  this@Register,
-                            //"Successfully Registered",
-                            //Toast.LENGTH_LONG
-                        //).show()
+                        Toast.makeText(
+                            this@Register,
+                            "Successfully Registered",
+                            Toast.LENGTH_LONG
+                        ).show()
                         val intent = Intent(this@Register, Vote::class.java)
                         startActivity(intent)
                         finish()
@@ -116,12 +101,12 @@ class Register : AppCompatActivity() {
 
 
                     else {
-                        //Toast.makeText(
-                          //  this@Register,
-                            //"Registration failed",
-                            //Toast.LENGTH_LONG
-                        //)
-                          //  .show()
+                        Toast.makeText(
+                            this@Register,
+                            "Registration failed",
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
                     }
                 }
             }

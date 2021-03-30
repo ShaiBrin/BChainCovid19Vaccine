@@ -5,7 +5,7 @@ class Person(
     private val firstName: String,
     private val lastName: String,
     private val authenticated: Boolean,
-    private val authenticateKey:String,
+    private val authenticationKey:String,
     private val hasVoted: Boolean
 ) {
     fun getId(): Number {
@@ -20,15 +20,15 @@ class Person(
         return lastName
     }
 
-    fun getauthenticationKey(): Boolean {
+    fun getAuthenticated(): Boolean {
         return authenticated
     }
 
-    fun getPublicKey():String{
-        return authenticateKey
+    fun getAuthenticationKey():String{
+        return authenticationKey
     }
 
-    fun hasVoted():Boolean{
+    fun getHasVoted():Boolean{
         return hasVoted
     }
 }
