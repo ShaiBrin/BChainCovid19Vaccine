@@ -30,7 +30,6 @@ class Vote : AppCompatActivity() {
 
             radioBtn = findViewById(selectedCandidate)
 
-            Toast.makeText(this, radioBtn.text, Toast.LENGTH_LONG).show()
             val intent = Intent(this@Vote, CastVote::class.java)
             intent.putExtra(EXTRA_STUDENT,  radioBtn.text.toString());
             startActivity(intent)

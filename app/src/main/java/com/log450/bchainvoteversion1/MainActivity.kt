@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        fbase.collection("blockchain").document("1")
+        fbase.collection("blockchain reference").document("1")
         .get().addOnSuccessListener {
                 document ->
             if(!document.exists()){
