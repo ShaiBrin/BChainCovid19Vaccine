@@ -3,7 +3,6 @@ package com.log450.bchainvoteversion1.Model
 import com.log450.bchainvoteversion1.Utils.hash
 
 data class Block(
-
     private val previousHash: String,
     private val data: String,
     private var hash: String = ""
@@ -26,5 +25,9 @@ data class Block(
 
     fun getData():String{
         return data
+    }
+
+    fun sign(key:String){
+        hash = "$key$hash".hash()
     }
 }

@@ -1,14 +1,11 @@
 package com.log450.bchainvoteversion1.Model
 
-class Person(
-    private val id: Number,
+open class Person(
+    private val id: Int,
     private val firstName: String,
     private val lastName: String,
-    private val authenticated: Boolean,
-    private val authenticationKey:String,
-    private val hasVoted: Boolean
 ) {
-    fun getId(): Number {
+    fun getId(): Int {
         return id
     }
 
@@ -20,16 +17,5 @@ class Person(
         return lastName
     }
 
-    fun getAuthenticated(): Boolean {
-        return authenticated
-    }
-
-    fun getAuthenticationKey():String{
-        return authenticationKey
-    }
-
-    fun getHasVoted():Boolean{
-        return hasVoted
-    }
 }
 

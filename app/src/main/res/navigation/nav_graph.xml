@@ -6,25 +6,37 @@
     app:startDestination="@id/mainFragment">
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.log450.bchainvoteversion1.MainFragment"
+        android:name="com.log450.bchainvoteversion1.UI.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
-            android:id="@+id/action_mainFragment_to_login"
-            app:destination="@id/login" />
+            android:id="@+id/action_mainFragment_to_credentialsActivity"
+            app:destination="@id/credentialsActivity" />
         <action
-            android:id="@+id/action_mainFragment_to_register"
-            app:destination="@id/register" />
+            android:id="@+id/action_mainFragment_to_electoralAuthentication"
+            app:destination="@id/electoralAuthentication" />
+        <action
+            android:id="@+id/action_mainFragment_to_candidateActivity"
+            app:destination="@id/candidateActivity" />
     </fragment>
 
     <activity
-        android:id="@+id/login"
-        android:name="com.log450.bchainvoteversion1.Login"
-        android:label="activity_login"
-        tools:layout="@layout/activity_login" />
+        android:id="@+id/credentialsActivity"
+        android:name="com.log450.bchainvoteversion1.Actors.Voter.CredentialsActivity"
+        android:label="activity_credentials"
+        tools:layout="@layout/activity_credentials" />
     <activity
-        android:id="@+id/register"
-        android:name="com.log450.bchainvoteversion1.Register"
-        android:label="activity_register"
-        tools:layout="@layout/activity_register" />
+        android:id="@+id/electoralAuthentication"
+        android:name="com.log450.bchainvoteversion1.Actors.Electoral.ElectoralAuthentication"
+        android:label="activity_electoral_authentication"
+        tools:layout="@layout/activity_electoral_authentication" />
+    <activity
+        android:id="@+id/candidateActivity"
+        android:name="com.log450.bchainvoteversion1.Actors.Candidate.CandidateActivity"
+        android:label="activity_candidate"
+        tools:layout="@layout/activity_candidate" >
+        <argument
+            android:name="nom"
+            app:argType="string" />
+    </activity>
 </navigation>
