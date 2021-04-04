@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BChainVoteVersion1">
-        <activity android:name=".Actors.Candidate.CandidateActivity"></activity>
+        <activity android:name=".Activities.BlockchainActivity"></activity>
+        <activity android:name=".Actors.Candidate.CandidateActivity" />
         <activity android:name=".Actors.Electoral.ElectoralActivity" />
         <activity android:name=".Actors.Electoral.ElectoralAuthentication" />
         <activity android:name=".Actors.Voter.CredentialsActivity" />
@@ -20,7 +21,7 @@
         <activity android:name=".Actors.Voter.Vote" />
         <activity android:name=".UI.Login" />
         <activity android:name=".Register" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

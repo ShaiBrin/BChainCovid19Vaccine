@@ -43,6 +43,10 @@ class MainFragment : androidx.fragment.app.Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_electoralAuthentication)
         }
 
+        view.findViewById<Button>(R.id.blochainPanel).setOnClickListener{
+            Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_blockchainActivity)
+        }
+
     }
 }
 

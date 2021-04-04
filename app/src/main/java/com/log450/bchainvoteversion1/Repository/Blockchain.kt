@@ -10,8 +10,14 @@ object Blockchain {
 
     private var fbase: FirebaseFirestore = FirebaseFirestore.getInstance()
     init {
-        val genesis = Block("0","0")
-        fbase.collection("blockchain").document("0").set(genesis)
-        fbase.collection("blockchain reference").document("0").set(genesis)
+        val genesis = Block("0", "0")
+        fbase.collection("blockchain reference")
+            .document("0")
+            .get().addOnSuccessListener { document ->
+                if (!document.exists()) {
+                    fbase.collection("blockchain").document("0").set(genesis)
+                    fbase.collection("blockchain reference").document("0").set(genesis)
+                }
+            }
     }
 }

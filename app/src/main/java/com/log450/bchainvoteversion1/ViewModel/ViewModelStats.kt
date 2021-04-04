@@ -17,6 +17,14 @@ class ViewModelStats: ViewModel() {
         emit(repository.getVaccines("MODERNA"))
     }
 
+    private val johson = liveData(Dispatchers.IO){
+        emit(repository.getVaccines("JOHNSON"))
+    }
+
+    private val vaccine = liveData(Dispatchers.IO){
+        emit(repository.getTotal())
+    }
+
 
     fun getPfizerQuantity(): LiveData<Int> {
         return pfizer
@@ -26,8 +34,13 @@ class ViewModelStats: ViewModel() {
         return moderna
     }
 
-//    fun getModernaQuantity(): LiveData<Int> {
-  //      val vaccines = pfizer.value.toString().toInt() +  moderna.value.toString().toInt()
+    fun getJohsonQuantity(): LiveData<Int> {
+        return johson
+    }
 
-    //}
+    fun getVaccineBlockchain(): LiveData<Int> {
+        return vaccine
+    }
+
+
 }

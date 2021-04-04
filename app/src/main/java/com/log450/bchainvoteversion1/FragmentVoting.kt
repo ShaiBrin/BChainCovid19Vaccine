@@ -31,21 +31,45 @@ class FragmentVoting (private val id:String): Fragment(), CandidateAdapter.OnIte
             recyclerView.adapter = viewModel.getCandidates().value?.let { CandidateAdapter(it as ArrayList<Candidate>, this) }
         })
         recyclerView.layoutManager = LinearLayoutManager(activity)
+        viewModel.setID(id)
         return candidateListView
     }
 
 
     override fun onItemClicked(candidate: Candidate) {
-        viewModel.updateCandidate(candidate.getName())
+        var v = false
 
-        viewModel.hasBeenUpdate().observe(this, Observer{
-            if(it)
-                Toast.makeText(requireContext(), "Your vote has been submitted", Toast.LENGTH_LONG).show()
-            else{
-                Toast.makeText(requireContext(), "Your vote has not been submitted", Toast.LENGTH_LONG).show()
-            }
+        viewModel.hasAlreadyVoted().observe(this, Observer{
+            v = it
         })
-        castVote()
+
+        if(!v) {
+            viewModel.updateCandidate(candidate.getName())
+
+            viewModel.hasBeenUpdate().observe(this, Observer {
+                if (it)
+                    Toast.makeText(
+                        requireContext(),
+                        "Your vote has been submitted",
+                        Toast.LENGTH_LONG
+                    ).show()
+                else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Your vote has not been submitted",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
+            castVote()
+       }
+        else {
+            Toast.makeText(
+                requireContext(),
+                "You already  voted.",
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 
     private fun castVote(){

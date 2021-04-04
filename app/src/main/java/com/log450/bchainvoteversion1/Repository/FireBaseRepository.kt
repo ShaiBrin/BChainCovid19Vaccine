@@ -15,9 +15,7 @@ import com.log450.bchainvoteversion1.Model.Block
 import com.log450.bchainvoteversion1.Model.VaccineType
 import com.log450.bchainvoteversion1.Network.VaccineAPI
 import com.log450.bchainvoteversion1.Utils.getVaccineFromApplication
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 
 
 class FireBaseRepository {
@@ -33,7 +31,25 @@ class FireBaseRepository {
         Blockchain
     }
 
-
+    suspend fun getBlockchain():ArrayList<Block>{
+        val blockchain = arrayListOf<Block>()
+        lateinit var block: Block
+        fbase.collection("blockchain").get()
+            .addOnSuccessListener { result ->
+                if (!result.isEmpty) {
+                    for (document in result) {
+                        block = Block(
+                            document.get("previousHash").toString(),
+                            document.get("data").toString(),
+                            document.get("hash").toString(),
+                        )
+                        blockchain.add(block)
+                    }
+                }
+            }
+            .await()
+        return blockchain
+    }
     suspend fun setPreviousHash(value: String): Boolean {
         lateinit var block: Block
         lateinit var previousHash: String
@@ -47,9 +63,9 @@ class FireBaseRepository {
                 } else {
                     previousHash = document.get("hash").toString()
                     previousDoc = document.get("data").toString()
-
                     block = Block(previousHash, value)
                     addBlock(block, previousDoc.toInt() + 1)
+
                     updateReference(block)
                     blockAdded = true
                 }
@@ -71,6 +87,19 @@ class FireBaseRepository {
             .update("hash", b.getHash())
     }
 
+    suspend fun getTotal(): Int {
+        var nbVaccine = 0
+        fbase.collection("applications")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    if (!result.isEmpty) {
+                        nbVaccine += document.get("nbVaccines").toString().toInt()
+                    }
+                }
+            }.await()
+        return nbVaccine
+    }
     suspend fun getVaccines(vaccineName: String): Int {
         var nbVaccine = 0
         fbase.collection("applications")
@@ -115,6 +144,17 @@ class FireBaseRepository {
         return true
     }
 
+    suspend fun getHasVoted(id: String) : Boolean{
+
+        val docRef = fbase.collection("voters")
+            .document(id)
+            .get()
+            .addOnSuccessListener{}
+            .await()
+        return docRef.get("hasVoted").toString().toBoolean()
+
+    }
+
     suspend fun updateVote(id: String) {
         fbase.collection("voters")
             .document(id)
@@ -146,7 +186,6 @@ class FireBaseRepository {
     }
 
     suspend fun createUserWithKey(authenticationKey: String, email: String, password: String): Int {
-        //var userCreated = false
         var userID = 99
         fbase.collection("voters").get()
             .addOnSuccessListener { result ->
@@ -156,16 +195,14 @@ class FireBaseRepository {
                                 .toString() && document.get("authenticated") == false
                         ) {
                             userID = document.get("id").toString().toInt()
-                            //                  userCreated = true
-                            //fauth.createUserWithEmailAndPassword(email, password)
-                            //.addOnCompleteListener { task: Task<AuthResult> ->
-                            //  if (task.isSuccessful) {
-                            // fbase.collection("voters")
-                            //      .document(document.id)
-                            //        .update("authenticated", "true")
-                            //      userCreated = true
-                            //    }
-                            //  }
+                            fauth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener { task: Task<AuthResult> ->
+                              if (task.isSuccessful) {
+                             fbase.collection("voters")
+                                  .document(document.id)
+                                    .update("authenticated", "true")
+                               }
+                            }
 
                             break
                         }
@@ -174,6 +211,18 @@ class FireBaseRepository {
             }.await()
         return userID
     }
+
+    /*suspend fun createUserWithKey(String, email: String, password: String) {
+        fauth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task: Task<AuthResult> ->
+                if (task.isSuccessful) {
+                    fbase.collection("voters")
+                        .document(document.id)
+                        .update("authenticated", "true")
+                }
+            }.await()
+
+    }*/
 
     suspend fun authenticatedUser(
         email: String,

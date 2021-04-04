@@ -11,10 +11,17 @@ class ViewModelVote : ViewModel() {
 
     private val repository = FireBaseRepository()
     private lateinit var candidateName : String
-
+    private lateinit var id:String
 
     private val blockAdded = liveData(Dispatchers.IO){
         emit(repository.setPreviousHash(candidateName))
+    }
+
+    fun setID(id:String){
+        this.id = id
+    }
+    private val alreadyVoted = liveData(Dispatchers.IO){
+        emit(repository.getHasVoted(id))
     }
 
     private val candidateUpdate = liveData(Dispatchers.IO){
@@ -46,6 +53,9 @@ class ViewModelVote : ViewModel() {
         return blockAdded
     }
 
+    fun hasAlreadyVoted():LiveData<Boolean>{
+        return alreadyVoted
+    }
 
 
 

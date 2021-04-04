@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.log450.bchainvoteversion1.ViewModel.ViewModelStats
 
 class FragmentStats : Fragment() {
@@ -33,6 +34,14 @@ class FragmentStats : Fragment() {
             {
                 view.findViewById<TextView>(R.id.ModernaAnswer).text = it.toString()
             })
+
+
+        viewModel.getVaccineBlockchain().observe(
+            viewLifecycleOwner,
+            {
+                view.findViewById<TextView>(R.id.JohssonaAnswer).text = it.toString()
+            })
+
     }
 
 

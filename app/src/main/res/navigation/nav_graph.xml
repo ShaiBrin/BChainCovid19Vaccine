@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_mainFragment_to_candidateActivity"
             app:destination="@id/candidateActivity" />
+        <action
+            android:id="@+id/action_mainFragment_to_blockchainActivity"
+            app:destination="@id/blockchainActivity" />
     </fragment>
 
     <activity
@@ -39,4 +42,9 @@
             android:name="nom"
             app:argType="string" />
     </activity>
+    <activity
+        android:id="@+id/blockchainActivity"
+        android:name="com.log450.bchainvoteversion1.Activities.BlockchainActivity"
+        android:label="activity_blockchain"
+        tools:layout="@layout/activity_blockchain" />
 </navigation>

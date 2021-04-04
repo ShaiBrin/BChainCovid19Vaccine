@@ -21,7 +21,7 @@ fun getVaccineFromApplication(vaccine: String): com.log450.bchainvoteversion1.Mo
     if(vaccine == "MODERNA"){
         v =   com.log450.bchainvoteversion1.Model.VaccineType.MODERNA
     }
-    if(vaccine == "JOHNSON&amp;JOHNSON"){
+    if(vaccine == "JOHNSON"){
         v =  com.log450.bchainvoteversion1.Model.VaccineType.JOHNSON
     }
     return v
