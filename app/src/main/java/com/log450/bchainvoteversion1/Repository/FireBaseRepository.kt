@@ -1,7 +1,6 @@
 package com.log450.bchainvoteversion1.Repository
 
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
+
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -23,11 +22,11 @@ class FireBaseRepository {
     private lateinit var voters: ArrayList<Voter>
 
     init {
-        initVoters()
+        //initVoters()
         initElectoral()
     }
 
-    private fun initVoters() {
+    suspend fun initVoters() {
         voters = arrayListOf(
             Voter(1, "Frank", "Lucas", "FrankL"),
             Voter(2, "Vito", "Corleone", "VitoC"),
@@ -37,7 +36,7 @@ class FireBaseRepository {
         )
 
         for (voter in voters) {
-            fbase.collection("voters").document(voter.getId().toString()).set(voter)
+            fbase.collection("voters").document(voter.getId().toString()).set(voter).await()
         }
     }
 
@@ -46,6 +45,9 @@ class FireBaseRepository {
         fbase.collection("electoral").document("0").set(electoral)
 
     }
+
+
+
     suspend fun initiateBlockChain() : Boolean{
         var blockChainExist = false
         val genesis = Block("0", "0")
@@ -126,29 +128,34 @@ class FireBaseRepository {
     suspend fun createUserWithKey(authenticationKey: String, email:String, password: String): Int {
         var userID = 99
         var user2 = ""
+        var userAlreadyRegistered = true
         fbase.collection("voters").get()
             .addOnSuccessListener { result ->
                 for (document in result) {
                     if (!result.isEmpty) {
                         if (authenticationKey == document.get("authenticationKey")
-                                .toString() && document.get("authenticated") == false
+                                .toString() && !document.get("authenticated").toString().toBoolean()
                         ) {
+                            userAlreadyRegistered = false
                             user2 = document.get("id").toString()
                             userID = document.get("id").toString().toInt()
                             break
+                        }
+                        else{
                         }
                     }
                 }
             }.await()
 
-        fauth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener{}
-            .await()
-
-        fbase.collection("voters")
-            .document(user2)
-            .update("authenticated", "true")
-            .await()
+        if(!userAlreadyRegistered){
+             fauth.createUserWithEmailAndPassword(email, password)
+               .addOnCompleteListener{}
+             .await()
+            fbase.collection("voters")
+                .document(user2)
+                .update("authenticated", "true")
+                .await()
+        }
 
         return userID
     }
@@ -164,12 +171,16 @@ class FireBaseRepository {
 
     }
 
-    suspend fun updateVote(id: String) {
+    suspend fun updateVote(id: String) : Boolean{
+        var i = false
         fbase.collection("voters")
             .document(id)
             .update("hasVoted", "true")
-            .addOnSuccessListener {}
+            .addOnSuccessListener {
+               i = true
+            }
             .await()
+        return i
     }
     /************************* VOTERS FUNCTIONS     END     ******************************/
 

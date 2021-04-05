@@ -11,16 +11,20 @@ class ViewModelElectoral {
 
     private lateinit var key : String
 
-    fun setKey(key:String){
-        this.key = key
-    }
-
     private val authenticated = liveData(Dispatchers.IO) {
         emit(repository.validateElector(key))
     }
 
     private val blockchain = liveData(Dispatchers.IO) {
         emit(repository.initiateBlockChain())
+    }
+
+    private val initVal = liveData(Dispatchers.IO) {
+        emit(repository.initVoters())
+    }
+
+    fun setKey(key:String){
+        this.key = key
     }
 
     fun isAuthenticated(): LiveData<Boolean> {
@@ -30,4 +34,9 @@ class ViewModelElectoral {
     fun blockChainExists(): LiveData<Boolean> {
         return blockchain
     }
+
+    fun hasDataBeenInitialized():LiveData<Unit>{
+        return initVal
+    }
+
 }

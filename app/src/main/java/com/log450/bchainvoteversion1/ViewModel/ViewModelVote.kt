@@ -17,9 +17,6 @@ class ViewModelVote : ViewModel() {
         emit(repository.setPreviousHash(candidateName))
     }
 
-    fun setID(id:String){
-        this.id = id
-    }
     private val alreadyVoted = liveData(Dispatchers.IO){
         emit(repository.getHasVoted(id))
     }
@@ -30,6 +27,10 @@ class ViewModelVote : ViewModel() {
 
     private val candidates = liveData(Dispatchers.IO){
         emit(repository.getCandidatesDB())
+    }
+
+    fun setID(id:String){
+        this.id = id
     }
 
     fun updateVoter(id:String) = liveData(Dispatchers.IO){

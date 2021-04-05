@@ -11,7 +11,7 @@ import com.log450.bchainvoteversion1.R
 import com.log450.bchainvoteversion1.Utils.Constants.EXTRA_ID
 
 
-class Menu : AppCompatActivity() {
+class VotingPanel : AppCompatActivity() {
     lateinit var voter: Voter
 
     override fun onCreate(savedInstanceState: Bundle?) {

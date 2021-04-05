@@ -16,7 +16,7 @@
         <activity android:name=".UI.Activities.ElectoralActivity" />
         <activity android:name=".UI.Activities.ElectoralAuthentication" />
         <activity android:name=".UI.Activities.CredentialsActivity" />
-        <activity android:name=".UI.Activities.Menu" />
+        <activity android:name=".UI.Activities.VotingPanel" />
         <activity android:name=".UI.Activities.CastVote" />
         <activity android:name=".UI.Activities.Vote" />
         <activity android:name=".UI.Activities.Login" />

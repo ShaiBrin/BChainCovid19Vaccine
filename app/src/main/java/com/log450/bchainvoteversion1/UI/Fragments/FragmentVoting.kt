@@ -33,17 +33,48 @@ class FragmentVoting (private val id:String): Fragment(), CandidateAdapter.OnIte
 
 
     override fun onItemClicked(candidate: Candidate) {
-        var v = false
+       // var v = false
 
         viewModel.hasAlreadyVoted().observe(this, Observer{
-            v = it
+            if(!it){
+                viewModel.updateCandidate(candidate.getName())
+
+                viewModel.updateVoter(id).observe(this,  {
+
+                    if(it){
+                        viewModel.hasBeenUpdate().observe(this, Observer {
+                            if (it)
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Your vote has been submitted",
+                                    Toast.LENGTH_LONG
+                                ).show()
+
+                            else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Your vote has not been submitted",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+                        })
+                        castVote()
+                    }
+                })
+            }
+
+            else{
+                Toast.makeText(
+                    requireContext(),
+                    "You already submitted your vote.",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         })
 
-        if(!v) {
+        /*if(!v) {
             viewModel.updateCandidate(candidate.getName())
-            viewModel.updateVoter(id).observe(this,  {
-                it
-            })
+            viewModel.updateVoter(id).observe(this,  {})
             viewModel.hasBeenUpdate().observe(this, Observer {
                 if (it)
                     Toast.makeText(
@@ -67,7 +98,7 @@ class FragmentVoting (private val id:String): Fragment(), CandidateAdapter.OnIte
                 "You already  voted.",
                 Toast.LENGTH_LONG
             ).show()
-        }
+        }*/
     }
 
 

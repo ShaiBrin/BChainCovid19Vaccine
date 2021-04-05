@@ -20,4 +20,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/initData"
+        android:layout_width="143dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="135dp"
+        android:layout_marginTop="116dp"
+        android:text="Initialize data"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ElectoralBlockchainBtn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

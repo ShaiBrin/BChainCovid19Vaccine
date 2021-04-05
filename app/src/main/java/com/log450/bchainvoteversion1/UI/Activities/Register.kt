@@ -6,8 +6,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.log450.bchainvoteversion1.Utils.validateCredentials
 import com.log450.bchainvoteversion1.ViewModel.ViewModelRegiser
 import androidx.lifecycle.Observer
@@ -48,13 +46,13 @@ class Register : AppCompatActivity() {
 
         viewModel.createUserWithKey(authenticationKey, email, password)
         viewModel.getUserID().observe(this, Observer { it ->
-                if (it.toString().isNotEmpty()) {
+                if (it.toString() != "99") {
                     Toast.makeText(
                         this@Register,
                         "Successfully Registered",
                         Toast.LENGTH_LONG
                     ).show()
-                    val intent = Intent(this@Register, Menu::class.java)
+                    val intent = Intent(this@Register, VotingPanel::class.java)
                     intent.putExtra(EXTRA_ID, it.toString())
                     startActivity(intent)
                     finish()
@@ -64,6 +62,7 @@ class Register : AppCompatActivity() {
                         "Registration failed",
                         Toast.LENGTH_LONG
                     ).show()
+
                 }
         })
 

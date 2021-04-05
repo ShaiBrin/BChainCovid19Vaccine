@@ -27,7 +27,4 @@ data class Block(
         return data
     }
 
-    fun sign(key:String){
-        hash = "$key$hash".hash()
-    }
 }

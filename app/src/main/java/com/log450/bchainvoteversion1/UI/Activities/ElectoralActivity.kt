@@ -6,24 +6,23 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.log450.bchainvoteversion1.R
-import com.log450.bchainvoteversion1.Utils.Constants
 import com.log450.bchainvoteversion1.ViewModel.ViewModelElectoral
 
 class ElectoralActivity : AppCompatActivity() {
 
-    private lateinit var blockchain: Button
+    private lateinit var startBlockchainBtn: Button
+    private lateinit var initBtn: Button
     private lateinit var viewModel: ViewModelElectoral
 
-    private lateinit var candidates: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_electoral)
         viewModel = ViewModelElectoral()
-        blockchain = findViewById(R.id.ElectoralBlockchainBtn)
+        startBlockchainBtn = findViewById(R.id.ElectoralBlockchainBtn)
+        initBtn = findViewById(R.id.initData)
 
-
-        blockchain.setOnClickListener {
+        startBlockchainBtn.setOnClickListener {
             viewModel.blockChainExists().observe(this, Observer {
                 if(!it){
                     Toast.makeText(this, "Blockchain is starting", Toast.LENGTH_LONG).show()
@@ -33,7 +32,14 @@ class ElectoralActivity : AppCompatActivity() {
                     Toast.makeText(this, "Blockchain has already been started", Toast.LENGTH_LONG).show()
                 }
             })
+        }
 
-    }
+        initBtn.setOnClickListener {
+            viewModel.hasDataBeenInitialized().observe(this, Observer {
+                it
+                    Toast.makeText(this, "Voters are initialized", Toast.LENGTH_LONG).show()
+
+            })
+        }
     }
 }
