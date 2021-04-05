@@ -21,7 +21,7 @@ Une application de technologie blockchain qui permet à un utilisateur de soumet
 
 ## CU implémentés
 
-**CU #1 : Submit vote**
+#### CU #1 : Submit vote
 Description:	    Le voter soumet le vaccin qu'il a pris.
 Acteurs:	        Le voter
 Préconditions:    Le voter doit avoir une clé d'authenficiation. 
