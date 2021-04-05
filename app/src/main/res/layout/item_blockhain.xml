@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/hash"
-        android:layout_width="10dp"
+        android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.30"
         android:textSize="15dp"
@@ -18,10 +18,9 @@
 
     <TextView
         android:id="@+id/data"
-        android:layout_width="10dp"
+        android:layout_width="11dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.30"
-        android:textSize="15dp"
-        />
+        android:textSize="15dp" />
 
 </LinearLayout>

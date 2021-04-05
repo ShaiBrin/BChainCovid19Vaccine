@@ -1,12 +1,10 @@
 package com.log450.bchainvoteversion1.Repository
 
-import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.log450.bchainvoteversion1.Actors.Candidate.Candidate
 import com.log450.bchainvoteversion1.Actors.Candidate.VaccineStats
 import com.log450.bchainvoteversion1.Actors.Electoral.Electoral
@@ -23,14 +21,49 @@ class FireBaseRepository {
     private var fbase = FirebaseFirestore.getInstance()
     private var fauth = FirebaseAuth.getInstance()
     private lateinit var voters: ArrayList<Voter>
-    private lateinit var electoral: Electoral
-    private lateinit var candidate: Candidate
 
     init {
         initVoters()
-        Blockchain
+        initElectoral()
     }
 
+    private fun initVoters() {
+        voters = arrayListOf(
+            Voter(1, "Frank", "Lucas", "FrankL"),
+            Voter(2, "Vito", "Corleone", "VitoC"),
+            Voter(3, "Al", "Capone", "AlC"),
+            Voter(4, "Donald", "Carducci", "DonaldC"),
+            Voter(5, "Tony", "Montanna", "TonyM")
+        )
+
+        for (voter in voters) {
+            fbase.collection("voters").document(voter.getId().toString()).set(voter)
+        }
+    }
+
+    private fun initElectoral(){
+        val electoral = Electoral (0, "Marc", "Bergevin", "Habs")
+        fbase.collection("electoral").document("0").set(electoral)
+
+    }
+    suspend fun initiateBlockChain() : Boolean{
+        var blockChainExist = false
+        val genesis = Block("0", "0")
+        fbase.collection("blockchain reference")
+            .document("0")
+            .get().addOnSuccessListener { document ->
+                if (!document.exists()) {
+                    fbase.collection("blockchain").document("0").set(genesis)
+                    fbase.collection("blockchain reference").document("0").set(genesis)
+                }
+                else{
+                    blockChainExist = true
+                }
+            }.await()
+        return blockChainExist
+    }
+
+    /************************* BLOCKCHAIN FUNCTIONS     START     ******************************/
     suspend fun getBlockchain():ArrayList<Block>{
         val blockchain = arrayListOf<Block>()
         lateinit var block: Block
@@ -86,8 +119,62 @@ class FireBaseRepository {
             .document("0")
             .update("hash", b.getHash())
     }
+    /************************* BLOCKCHAIN FUNCTIONS     END     ******************************/
 
-    suspend fun getTotal(): Int {
+
+    /************************* VOTERS FUNCTIONS     START     ******************************/
+    suspend fun createUserWithKey(authenticationKey: String, email:String, password: String): Int {
+        var userID = 99
+        var user2 = ""
+        fbase.collection("voters").get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    if (!result.isEmpty) {
+                        if (authenticationKey == document.get("authenticationKey")
+                                .toString() && document.get("authenticated") == false
+                        ) {
+                            user2 = document.get("id").toString()
+                            userID = document.get("id").toString().toInt()
+                            break
+                        }
+                    }
+                }
+            }.await()
+
+        fauth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener{}
+            .await()
+
+        fbase.collection("voters")
+            .document(user2)
+            .update("authenticated", "true")
+            .await()
+
+        return userID
+    }
+
+    suspend fun getHasVoted(id: String) : Boolean{
+
+        val docRef = fbase.collection("voters")
+            .document(id)
+            .get()
+            .addOnSuccessListener{}
+            .await()
+        return docRef.get("hasVoted").toString().toBoolean()
+
+    }
+
+    suspend fun updateVote(id: String) {
+        fbase.collection("voters")
+            .document(id)
+            .update("hasVoted", "true")
+            .addOnSuccessListener {}
+            .await()
+    }
+    /************************* VOTERS FUNCTIONS     END     ******************************/
+
+    /************************* CANDIDATES FUNCTIONS     START     ******************************/
+    suspend fun getTotalVaccine(): Int {
         var nbVaccine = 0
         fbase.collection("applications")
             .get()
@@ -100,7 +187,7 @@ class FireBaseRepository {
             }.await()
         return nbVaccine
     }
-    suspend fun getVaccines(vaccineName: String): Int {
+    suspend fun getVaccineType(vaccineName: String): Int {
         var nbVaccine = 0
         fbase.collection("applications")
             .get()
@@ -144,24 +231,7 @@ class FireBaseRepository {
         return true
     }
 
-    suspend fun getHasVoted(id: String) : Boolean{
 
-        val docRef = fbase.collection("voters")
-            .document(id)
-            .get()
-            .addOnSuccessListener{}
-            .await()
-        return docRef.get("hasVoted").toString().toBoolean()
-
-    }
-
-    suspend fun updateVote(id: String) {
-        fbase.collection("voters")
-            .document(id)
-            .update("hasVoted", "true")
-            .addOnSuccessListener {}
-            .await()
-    }
 
     suspend fun voteCandidate(candidateName: String): Boolean {
         var candidateUpdated = false
@@ -184,108 +254,26 @@ class FireBaseRepository {
             }.await()
         return candidateUpdated
     }
+    /************************* CANDIDATES FUNCTIONS     END     ******************************/
 
-    suspend fun createUserWithKey(authenticationKey: String, email: String, password: String): Int {
-        var userID = 99
-        fbase.collection("voters").get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    if (!result.isEmpty) {
-                        if (authenticationKey == document.get("authenticationKey")
-                                .toString() && document.get("authenticated") == false
-                        ) {
-                            userID = document.get("id").toString().toInt()
-                            fauth.createUserWithEmailAndPassword(email, password)
-                            .addOnCompleteListener { task: Task<AuthResult> ->
-                              if (task.isSuccessful) {
-                             fbase.collection("voters")
-                                  .document(document.id)
-                                    .update("authenticated", "true")
-                               }
-                            }
 
-                            break
-                        }
-                    }
+    suspend fun validateElector(electorKey:String):Boolean{
+        var validated = false
+        fbase.collection("electoral")
+            .document("0")
+            .get()
+            .addOnSuccessListener { document ->
+                if (document.exists() && (electorKey == document.get("key").toString())){
+                    validated = true
                 }
             }.await()
-        return userID
+        return validated
     }
 
-    /*suspend fun createUserWithKey(String, email: String, password: String) {
-        fauth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task: Task<AuthResult> ->
-                if (task.isSuccessful) {
-                    fbase.collection("voters")
-                        .document(document.id)
-                        .update("authenticated", "true")
-                }
-            }.await()
-
-    }*/
-
-    suspend fun authenticatedUser(
-        email: String,
-        password: String,
-        document: QueryDocumentSnapshot
-    ): Boolean {
-        var userCreated: Boolean = false
-
-        fauth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task: Task<AuthResult> ->
-                if (task.isSuccessful) {
-                    fbase.collection("voters")
-                        .document(document.id)
-                        .update("authenticated", "true")
-                    userCreated = true
-                }
-            }.await()
-
-        return userCreated
-    }
-
-
-    suspend fun getVotersDB(): ArrayList<Voter> {
-        val votersDB = arrayListOf<Voter>()
-        lateinit var voter: Voter
-        fbase.collection("voters").get()
-            .addOnSuccessListener { result ->
-                if (!result.isEmpty) {
-                    for (document in result) {
-                        voter = Voter(
-                            document.get("id").toString().toInt(),
-                            document.get("firstName").toString(),
-                            document.get("lastName").toString(),
-                            document.get("authenticationKey").toString()
-                        )
-                        votersDB.add(voter)
-                    }
-                }
-            }
-            .await()
-        return votersDB
-    }
 
     suspend fun getAPI(): VaccineStats {
         return VaccineAPI().getAPI()
     }
 
-    suspend fun incrementVaccine() {
-        VaccineAPI().updateAPI()
-    }
-
-    private fun initVoters() {
-        voters = arrayListOf(
-            Voter(1, "Frank", "Lucas", "FrankL"),
-            Voter(2, "Vito", "Corleone", "VitoC"),
-            Voter(3, "Al", "Capone", "AlC"),
-            Voter(4, "Donald", "Carducci", "DonaldC"),
-            Voter(5, "Tony", "Montanna", "TonyM")
-        )
-
-        for (voter in voters) {
-            fbase.collection("voters").document(voter.getId().toString()).set(voter)
-        }
-    }
 
 }

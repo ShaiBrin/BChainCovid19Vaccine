@@ -15,8 +15,8 @@ class ViewModelRegiser : ViewModel() {
     private lateinit var password:String
 
 
-    private val userCreated = liveData(Dispatchers.IO) {
-        emit(repository.createUserWithKey(authenticationKey,email,password))
+    private val userID = liveData(Dispatchers.IO) {
+        emit(repository.createUserWithKey(authenticationKey, email,password))
     }
 
     fun createUserWithKey(authenticationKey: String, email: String, password: String) {
@@ -26,7 +26,9 @@ class ViewModelRegiser : ViewModel() {
     }
 
     fun getUserID():LiveData<Int>{
-        return userCreated
+        return userID
     }
+
+
 
 }

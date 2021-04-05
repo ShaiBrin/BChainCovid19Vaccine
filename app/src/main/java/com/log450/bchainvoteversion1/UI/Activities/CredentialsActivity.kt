@@ -1,12 +1,10 @@
-package com.log450.bchainvoteversion1.Actors.Voter
+package com.log450.bchainvoteversion1.UI.Activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import com.log450.bchainvoteversion1.R
-import com.log450.bchainvoteversion1.Register
-import com.log450.bchainvoteversion1.UI.Login
 
 class CredentialsActivity : AppCompatActivity() {
 

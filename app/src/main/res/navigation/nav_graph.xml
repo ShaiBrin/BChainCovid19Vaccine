@@ -6,7 +6,7 @@
     app:startDestination="@id/mainFragment">
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.log450.bchainvoteversion1.UI.MainFragment"
+        android:name="com.log450.bchainvoteversion1.UI.Fragments.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
@@ -25,17 +25,17 @@
 
     <activity
         android:id="@+id/credentialsActivity"
-        android:name="com.log450.bchainvoteversion1.Actors.Voter.CredentialsActivity"
+        android:name="com.log450.bchainvoteversion1.UI.Activities.CredentialsActivity"
         android:label="activity_credentials"
         tools:layout="@layout/activity_credentials" />
     <activity
         android:id="@+id/electoralAuthentication"
-        android:name="com.log450.bchainvoteversion1.Actors.Electoral.ElectoralAuthentication"
+        android:name="com.log450.bchainvoteversion1.UI.Activities.ElectoralAuthentication"
         android:label="activity_electoral_authentication"
         tools:layout="@layout/activity_electoral_authentication" />
     <activity
         android:id="@+id/candidateActivity"
-        android:name="com.log450.bchainvoteversion1.Actors.Candidate.CandidateActivity"
+        android:name="com.log450.bchainvoteversion1.UI.Activities.CandidateActivity"
         android:label="activity_candidate"
         tools:layout="@layout/activity_candidate" >
         <argument
@@ -44,7 +44,7 @@
     </activity>
     <activity
         android:id="@+id/blockchainActivity"
-        android:name="com.log450.bchainvoteversion1.Activities.BlockchainActivity"
+        android:name="com.log450.bchainvoteversion1.UI.Activities.BlockchainActivity"
         android:label="activity_blockchain"
         tools:layout="@layout/activity_blockchain" />
 </navigation>

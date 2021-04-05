@@ -1,8 +1,6 @@
-package com.log450.bchainvoteversion1
+package com.log450.bchainvoteversion1.UI.Fragments
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.log450.bchainvoteversion1.Actors.Candidate.Candidate
-import com.log450.bchainvoteversion1.Actors.Candidate.CandidateAdapter
-import com.log450.bchainvoteversion1.Actors.Voter.CastVote
-import com.log450.bchainvoteversion1.Utils.Constants.EXTRA_STUDENT
+import com.log450.bchainvoteversion1.Adapter.CandidateAdapter
+import com.log450.bchainvoteversion1.R
 import com.log450.bchainvoteversion1.ViewModel.ViewModelVote
-import org.antlr.v4.runtime.misc.MurmurHash.finish
 
 
 class FragmentVoting (private val id:String): Fragment(), CandidateAdapter.OnItemClickListener{
@@ -45,7 +41,9 @@ class FragmentVoting (private val id:String): Fragment(), CandidateAdapter.OnIte
 
         if(!v) {
             viewModel.updateCandidate(candidate.getName())
-
+            viewModel.updateVoter(id).observe(this,  {
+                it
+            })
             viewModel.hasBeenUpdate().observe(this, Observer {
                 if (it)
                     Toast.makeText(
@@ -72,10 +70,9 @@ class FragmentVoting (private val id:String): Fragment(), CandidateAdapter.OnIte
         }
     }
 
+
     private fun castVote(){
-        viewModel.updateVoter(id).observe(this,  {
-            it
-        })
+
 
         viewModel.hasBeenAdded().observe(this, Observer {
             it

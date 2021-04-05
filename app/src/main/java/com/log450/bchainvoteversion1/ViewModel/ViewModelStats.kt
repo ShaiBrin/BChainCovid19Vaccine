@@ -3,6 +3,7 @@ package com.log450.bchainvoteversion1.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import com.log450.bchainvoteversion1.Actors.Candidate.VaccineStats
 import com.log450.bchainvoteversion1.Repository.FireBaseRepository
 import kotlinx.coroutines.Dispatchers
 
@@ -10,19 +11,23 @@ class ViewModelStats: ViewModel() {
     private val repository = FireBaseRepository()
 
     private val pfizer = liveData(Dispatchers.IO){
-        emit(repository.getVaccines("PFIZER"))
+        emit(repository.getVaccineType("PFIZER"))
     }
 
     private val moderna = liveData(Dispatchers.IO){
-        emit(repository.getVaccines("MODERNA"))
+        emit(repository.getVaccineType("MODERNA"))
     }
 
     private val johson = liveData(Dispatchers.IO){
-        emit(repository.getVaccines("JOHNSON"))
+        emit(repository.getVaccineType("JOHNSON"))
     }
 
     private val vaccine = liveData(Dispatchers.IO){
-        emit(repository.getTotal())
+        emit(repository.getTotalVaccine())
+    }
+
+    private val vaccineAPI = liveData(Dispatchers.IO){
+        emit(repository.getAPI())
     }
 
 
@@ -40,6 +45,10 @@ class ViewModelStats: ViewModel() {
 
     fun getVaccineBlockchain(): LiveData<Int> {
         return vaccine
+    }
+
+    fun getAPI():LiveData<VaccineStats>{
+        return vaccineAPI
     }
 
 

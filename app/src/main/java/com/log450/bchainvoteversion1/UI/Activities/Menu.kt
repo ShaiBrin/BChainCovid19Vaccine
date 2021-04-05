@@ -1,13 +1,13 @@
-package com.log450.bchainvoteversion1.Actors.Voter
+package com.log450.bchainvoteversion1.UI.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.log450.bchainvoteversion1.FragmentStats
-import com.log450.bchainvoteversion1.FragmentVoting
+import com.log450.bchainvoteversion1.Actors.Voter.Voter
+import com.log450.bchainvoteversion1.UI.Fragments.FragmentStats
+import com.log450.bchainvoteversion1.UI.Fragments.FragmentVoting
 import com.log450.bchainvoteversion1.R
-import com.log450.bchainvoteversion1.Utils.Constants
 import com.log450.bchainvoteversion1.Utils.Constants.EXTRA_ID
 
 
@@ -29,11 +29,13 @@ class Menu : AppCompatActivity() {
                     R.id.StatsOptions -> {
                         loadFragment(FragmentStats())
                         return@setOnNavigationItemSelectedListener true
+                        finish()
                     }
 
                     R.id.voteOption -> {
                         loadFragment(FragmentVoting(id))
                         return@setOnNavigationItemSelectedListener true
+                        finish()
                     }
                 }
                 false

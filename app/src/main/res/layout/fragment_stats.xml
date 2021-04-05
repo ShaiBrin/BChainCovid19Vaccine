@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     tools:context=".FragmentStats">
@@ -10,7 +11,7 @@
         android:id="@+id/vaccinated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="100dp"
+        android:layout_marginVertical="40dp"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="184dp"
         android:layout_marginTop="632dp"
@@ -24,8 +25,8 @@
         android:id="@+id/vaccinatedAnswerAnswer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="100dp"
-        android:layout_marginStart="200dp"
+        android:layout_marginVertical="40dp"
+        android:layout_marginStart="250dp"
         android:layout_marginLeft="184dp"
         android:layout_marginTop="632dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
@@ -38,51 +39,48 @@
         android:id="@+id/Pfizer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="200dp"
+        android:layout_marginVertical="100dp"
         android:layout_marginStart="40dp"
-        android:layout_marginLeft="184dp"
-        android:layout_marginTop="316dp"
+        android:layout_marginBottom="100dp"
         android:text="Pfizer"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textColor="@color/purple_700"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/Moderna"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <TextView
         android:id="@+id/PfizerAnswer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="200dp"
-        android:layout_marginStart="200dp"
-        android:layout_marginLeft="184dp"
-        android:layout_marginTop="500dp"
+        android:layout_marginVertical="150dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="96dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textColor="@color/purple_700"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/Moderna"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="300dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="184dp"
-        android:layout_marginTop="316dp"
+        android:layout_marginVertical="280dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="256dp"
         android:text="Moderna"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textColor="@color/purple_700"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <TextView
         android:id="@+id/ModernaAnswer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="300dp"
-        android:layout_marginStart="200dp"
+        android:layout_marginVertical="280dp"
+        android:layout_marginStart="250dp"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="96dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
@@ -95,7 +93,7 @@
         android:id="@+id/JohsonText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="400dp"
+        android:layout_marginVertical="370dp"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="184dp"
         android:layout_marginTop="632dp"
@@ -109,8 +107,8 @@
         android:id="@+id/JohssonaAnswer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="400dp"
-        android:layout_marginStart="200dp"
+        android:layout_marginVertical="370dp"
+        android:layout_marginStart="250dp"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="96dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
@@ -119,5 +117,31 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
 
+    <TextView
+        android:id="@+id/VaccineBlockChain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="450dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="184dp"
+        android:layout_marginTop="632dp"
+        android:text="Blockchain Total"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textColor="@color/purple_700"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/VaccineBlockChainAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="450dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="96dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textColor="@color/purple_700"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

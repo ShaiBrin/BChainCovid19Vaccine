@@ -16,9 +16,4 @@ class VaccineAPI {
     suspend fun getAPI(): VaccineStats {
         return client.getVaccinesStats()
     }
-
-    suspend fun updateAPI()  {
-         client.getVaccinesStats().all.people_vaccinated + 1
-    }
-
 }

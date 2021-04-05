@@ -1,4 +1,4 @@
-package com.log450.bchainvoteversion1.Actors.Voter
+package com.log450.bchainvoteversion1.UI.Activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
