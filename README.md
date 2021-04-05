@@ -21,7 +21,7 @@ Une application de technologie blockchain qui permet à un utilisateur de soumet
 
 ## CU implémentés
 
-######CU #1 : Submit vote
+###### CU #1 : Submit vote
 Description:	    Le voter soumet le vaccin qu'il a pris.
 Acteurs:	        Le voter
 Préconditions:    Le voter doit avoir une clé d'authenficiation. 
@@ -37,7 +37,7 @@ Scénario
 Scénario Alternatifs	
 1. La clé d'authentification n'est pas validée.
 
-######CU #2 : Submit candidacy
+###### CU #2 : Submit candidacy
 Description:      La compagnie postule sa candidature
 Acteurs:	        Le candidat
 Préconditions:    Le candidat a déjà été approuvé par le gouvernment.
@@ -51,7 +51,7 @@ Scénario
 Scénario Alternatifs	
 1.	Le candidat n’a pas rempli adéquatement le formulaire.
 
-######CU #3 : Starts the blockchain
+###### CU #3 : Starts the blockchain
 Description:      L'électoral démarre le blockchain.
 Acteurs:	        L'électoral.
 Préconditions:    L'électoral est authentifié.
