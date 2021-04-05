@@ -9,7 +9,7 @@ import android.widget.TextView
 import com.log450.bchainvoteversion1.R
 import com.log450.bchainvoteversion1.ViewModel.ViewModelStats
 
-class FragmentStats : Fragment() {
+class FragmentStats(private val countryName: String) : Fragment(){
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -18,12 +18,14 @@ class FragmentStats : Fragment() {
         // Inflate the layout for this fragment
         val statsView =  inflater.inflate(R.layout.fragment_stats, container, false) as View
         val v = ViewModelStats()
+        v.setName(countryName)
         displayStats(statsView,v)
         return statsView
     }
 
     private fun displayStats(view: View, viewModel: ViewModelStats) {
 
+        view.findViewById<TextView>(R.id.country).text = countryName
         viewModel.getAPI().observe(
             viewLifecycleOwner,
             {
@@ -53,9 +55,6 @@ class FragmentStats : Fragment() {
             {
                 view.findViewById<TextView>(R.id.VaccineBlockChainAnswer).text = it.toString()
             })
-
     }
-
-
 
 }

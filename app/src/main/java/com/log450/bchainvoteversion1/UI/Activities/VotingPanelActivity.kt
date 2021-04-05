@@ -13,29 +13,54 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.log450.bchainvoteversion1.Model.Block
-import com.log450.bchainvoteversion1.Adapter.BlockchainAdapter
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.log450.bchainvoteversion1.UI.Fragments.FragmentStats
+import com.log450.bchainvoteversion1.UI.Fragments.FragmentVoting
 import com.log450.bchainvoteversion1.R
-import com.log450.bchainvoteversion1.ViewModel.ViewModelBlockchain
+import com.log450.bchainvoteversion1.Utils.Constants.EXTRA_ID
 
-class BlockchainActivity : AppCompatActivity(), LocationListener {
+
+class VotingPanelActivity : AppCompatActivity(), LocationListener {
     private val locationPermissionCode = 2
     private lateinit var locationManager: LocationManager
     private lateinit var geocoder: Geocoder
+    private lateinit var country: String
     override fun onCreate(savedInstanceState: Bundle?) {
-        val viewModel = ViewModelBlockchain()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_blockchain)
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerBlock)
-        viewModel.getBlockchain().observe(this, Observer {
-            recyclerView.adapter = viewModel.getBlockchain().value?.let { BlockchainAdapter(it as ArrayList<Block>, ) }
-        })
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        setContentView(R.layout.activity_menu)
+        geocoder = Geocoder(this)
+        val id = intent.getStringExtra(EXTRA_ID) as String
+        getLocation()
+        loadBottomNavigation(id)
     }
 
+    fun loadBottomNavigation(id:String) {
+        this.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+            .setOnNavigationItemSelectedListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.StatsOptions -> {
+                        loadFragment(FragmentStats(country))
+                        return@setOnNavigationItemSelectedListener true
+                        finish()
+                    }
+
+                    R.id.voteOption -> {
+                        loadFragment(FragmentVoting(id))
+                        return@setOnNavigationItemSelectedListener true
+                        finish()
+                    }
+                }
+                false
+            }
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        val transaction = this.supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frameContainerIdentifiant, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
 
     private fun getLocation() {
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -53,7 +78,7 @@ class BlockchainActivity : AppCompatActivity(), LocationListener {
         //geocoder.getFromLocation(location.latitude, location.longitude,1)[0].countryName
         Log.d( "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: ",geocoder.getFromLocation(location.latitude, location.longitude,1)[0].countryName
             .toString())
-
+        country = geocoder.getFromLocation(location.latitude, location.longitude,1)[0].countryName
         //tvGpsLocation = findViewById(R.id.textView)
         // tvGpsLocation.text = "Latitude: " + location.latitude + " , Longitude: " + location.longitude
     }
@@ -68,4 +93,5 @@ class BlockchainActivity : AppCompatActivity(), LocationListener {
             }
         }
     }
+
 }

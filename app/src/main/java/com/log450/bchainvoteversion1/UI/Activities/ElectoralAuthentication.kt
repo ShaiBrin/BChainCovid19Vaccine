@@ -17,8 +17,6 @@ class ElectoralAuthentication : AppCompatActivity() {
 
     private lateinit var mElectorKey: EditText
     private lateinit var electorKey: String
-    private var fbase: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private lateinit var view: View
     private lateinit var registerBtn: Button
     private lateinit var viewModel:ViewModelElectoral
 
@@ -36,7 +34,7 @@ class ElectoralAuthentication : AppCompatActivity() {
     }
 
     private fun validateCredentials() {
-        electorKey = validateCredentials(mElectorKey)
+        electorKey = validateCredentials(mElectorKey,false)
         viewModel.setKey(electorKey)
         viewModel.isAuthenticated().observe(this, Observer {
             if(it){

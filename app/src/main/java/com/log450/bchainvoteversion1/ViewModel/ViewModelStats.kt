@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 
 class ViewModelStats: ViewModel() {
     private val repository = FireBaseRepository()
+    private lateinit var countryName : String
 
     private val pfizer = liveData(Dispatchers.IO){
         emit(repository.getVaccineType("PFIZER"))
@@ -27,9 +28,12 @@ class ViewModelStats: ViewModel() {
     }
 
     private val vaccineAPI = liveData(Dispatchers.IO){
-        emit(repository.getAPI())
+        emit(repository.getAPI(countryName))
     }
 
+    fun setName(countryName:String){
+        this.countryName = countryName
+    }
 
     fun getPfizerQuantity(): LiveData<Int> {
         return pfizer

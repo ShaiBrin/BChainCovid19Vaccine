@@ -27,8 +27,7 @@ class MainFragment : androidx.fragment.app.Fragment() {
         }
 
         view.findViewById<Button>(R.id.CandidateBtn).setOnClickListener{
-            val directions = MainFragmentDirections.actionMainFragmentToCandidateActivity("Ishraq")
-            Navigation.findNavController(view).navigate(directions)
+            Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_candidateActivity)
 
         }
 

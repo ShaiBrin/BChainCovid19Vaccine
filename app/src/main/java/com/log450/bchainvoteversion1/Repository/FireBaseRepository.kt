@@ -308,8 +308,8 @@ class FireBaseRepository {
     }
 
 
-    suspend fun getAPI(): VaccineStats {
-        return VaccineAPI().getAPI()
+    suspend fun getAPI(countryName:String): VaccineStats {
+        return VaccineAPI().getAPI(countryName)
     }
 
 

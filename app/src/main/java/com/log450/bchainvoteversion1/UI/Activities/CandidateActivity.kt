@@ -27,7 +27,7 @@ class CandidateActivity : AppCompatActivity() {
         submitBtn.setOnClickListener {
             val vaccine : Int = radioGroup!!.checkedRadioButtonId
             radioBtn = findViewById(vaccine)
-            viewModel.submitCandidateApplication(validateCredentials(mCandidateName), radioBtn.text.toString())
+            viewModel.submitCandidateApplication(validateCredentials(mCandidateName,false), radioBtn.text.toString())
             viewModel.isApplicationCreated().observe(this, Observer {
                 if(it){
                     Toast.makeText(this, "Your application has been submitted", Toast.LENGTH_LONG).show()

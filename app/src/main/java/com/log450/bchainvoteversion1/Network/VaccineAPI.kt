@@ -13,7 +13,7 @@ class VaccineAPI {
         .build()
         .create(VaccineService::class.java)
 
-    suspend fun getAPI(): VaccineStats {
-        return client.getVaccinesStats()
+    suspend fun getAPI(countryName:String): VaccineStats {
+        return client.getVaccinesStats(countryName)
     }
 }

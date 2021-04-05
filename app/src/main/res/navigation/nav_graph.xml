@@ -37,11 +37,7 @@
         android:id="@+id/candidateActivity"
         android:name="com.log450.bchainvoteversion1.UI.Activities.CandidateActivity"
         android:label="activity_candidate"
-        tools:layout="@layout/activity_candidate" >
-        <argument
-            android:name="nom"
-            app:argType="string" />
-    </activity>
+        tools:layout="@layout/activity_candidate" />
     <activity
         android:id="@+id/blockchainActivity"
         android:name="com.log450.bchainvoteversion1.UI.Activities.BlockchainActivity"

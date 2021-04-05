@@ -20,12 +20,12 @@ class CredentialsActivity : AppCompatActivity() {
         loginBtn = findViewById(R.id.LoginPanelBtn)
 
         registerBtn.setOnClickListener {
-            val intent = Intent(this@CredentialsActivity, Register::class.java)
+            val intent = Intent(this@CredentialsActivity, RegisterActivity::class.java)
             startActivity(intent)
         }
         
         loginBtn.setOnClickListener {
-            val intent = Intent(this@CredentialsActivity, Login::class.java)
+            val intent = Intent(this@CredentialsActivity, LoginActivity::class.java)
             startActivity(intent)
         }
 
