@@ -57,7 +57,4 @@ class ViewModelVote : ViewModel() {
     fun hasAlreadyVoted():LiveData<Boolean>{
         return alreadyVoted
     }
-
-
-
 }

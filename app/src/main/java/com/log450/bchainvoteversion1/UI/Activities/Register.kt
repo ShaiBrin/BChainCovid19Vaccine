@@ -36,6 +36,9 @@ class Register : AppCompatActivity() {
         registerBtn.setOnClickListener {
             validateCredentials()
         }
+
+
+
     }
 
 

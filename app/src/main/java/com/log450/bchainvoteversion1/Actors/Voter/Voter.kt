@@ -12,6 +12,11 @@ class Voter(
 
     private val authenticated:Boolean = false
     private val hasVoted:Boolean = false
+    private var email:String = ""
+
+    fun setEmail(email:String){
+        this.email = email
+    }
 
     fun getAuthenticated(): Boolean {
         return authenticated
@@ -23,5 +28,9 @@ class Voter(
 
     fun getHasVoted(): Boolean {
         return hasVoted
+    }
+
+    fun getEmail():String{
+        return email
     }
 }

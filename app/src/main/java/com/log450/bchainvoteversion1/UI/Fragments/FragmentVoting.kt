@@ -21,7 +21,6 @@ class FragmentVoting (private val id:String): Fragment(), CandidateAdapter.OnIte
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstaceState: Bundle?): View{
         val candidateListView = inflater.inflate(R.layout.fragment_voting, container,false) as View
 
-        //The list of Students that is passed in the StudentAdapter observers the viewmodel.
         val recyclerView = candidateListView.findViewById(R.id.recycleCandidate) as RecyclerView
         viewModel.getCandidates().observe(viewLifecycleOwner, Observer<List<Candidate>>{
             recyclerView.adapter = viewModel.getCandidates().value?.let { CandidateAdapter(it as ArrayList<Candidate>, this) }
@@ -33,8 +32,6 @@ class FragmentVoting (private val id:String): Fragment(), CandidateAdapter.OnIte
 
 
     override fun onItemClicked(candidate: Candidate) {
-       // var v = false
-
         viewModel.hasAlreadyVoted().observe(this, Observer{
             if(!it){
                 viewModel.updateCandidate(candidate.getName())
@@ -72,38 +69,10 @@ class FragmentVoting (private val id:String): Fragment(), CandidateAdapter.OnIte
             }
         })
 
-        /*if(!v) {
-            viewModel.updateCandidate(candidate.getName())
-            viewModel.updateVoter(id).observe(this,  {})
-            viewModel.hasBeenUpdate().observe(this, Observer {
-                if (it)
-                    Toast.makeText(
-                        requireContext(),
-                        "Your vote has been submitted",
-                        Toast.LENGTH_LONG
-                    ).show()
-                else {
-                    Toast.makeText(
-                        requireContext(),
-                        "Your vote has not been submitted",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-            })
-            castVote()
-       }
-        else {
-            Toast.makeText(
-                requireContext(),
-                "You already  voted.",
-                Toast.LENGTH_LONG
-            ).show()
-        }*/
     }
 
 
     private fun castVote(){
-
 
         viewModel.hasBeenAdded().observe(this, Observer {
             it

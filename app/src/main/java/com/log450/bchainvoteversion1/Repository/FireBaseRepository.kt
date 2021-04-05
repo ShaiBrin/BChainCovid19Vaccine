@@ -22,7 +22,6 @@ class FireBaseRepository {
     private lateinit var voters: ArrayList<Voter>
 
     init {
-        //initVoters()
         initElectoral()
     }
 
@@ -125,6 +124,35 @@ class FireBaseRepository {
 
 
     /************************* VOTERS FUNCTIONS     START     ******************************/
+
+
+    suspend fun retrieveUserID(email:String, password:String):Int{
+        var isSigned = false
+        var id = 99
+        fauth.signInWithEmailAndPassword(email,password).addOnSuccessListener {
+            isSigned = true
+        }.await()
+
+        if(isSigned){
+            fbase.collection("voters").get()
+                .addOnSuccessListener { result ->
+                    for (document in result) {
+                        if (!result.isEmpty) {
+                            if (document.get("authenticated").toString().toBoolean()
+                                && document.get("email") == email
+                            ) {
+                                id = document.get("id").toString().toInt()
+                                break
+                            }
+                            else{
+                            }
+                        }
+                    }
+                }.await()
+        }
+        return id
+
+    }
     suspend fun createUserWithKey(authenticationKey: String, email:String, password: String): Int {
         var userID = 99
         var user2 = ""
@@ -147,14 +175,12 @@ class FireBaseRepository {
                 }
             }.await()
 
+        fbase.collection("voters").document()
+
         if(!userAlreadyRegistered){
-             fauth.createUserWithEmailAndPassword(email, password)
-               .addOnCompleteListener{}
-             .await()
-            fbase.collection("voters")
-                .document(user2)
-                .update("authenticated", "true")
-                .await()
+            fauth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{}.await()
+            fbase.collection("voters").document(user2).update("email", email).await()
+            fbase.collection("voters").document(user2).update("authenticated", "true").await()
         }
 
         return userID
