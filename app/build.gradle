@@ -4,10 +4,19 @@ plugins {
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
 
-    //id 'androidx.navigation.safeargs.kotlin'
 }
 apply plugin: "androidx.navigation.safeargs.kotlin"
+
+
 android {
+    signingConfigs {
+        signIn {
+            storeFile file('C:\\Users\\Ishr_\\OneDrive - ETS\\ETS Semester - 10\\LOG450\\Laboratoires\\LaboFinal\\key_store\\key_store.jks')
+            storePassword 'A1IfuckedKotlin'
+            keyAlias 'key0'
+            keyPassword 'A1IfuckedKotlin'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
