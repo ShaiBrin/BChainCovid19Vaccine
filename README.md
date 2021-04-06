@@ -4,7 +4,7 @@
 Shabab Ishraq
 
 ## Brève description de l'application
-Une application de technologie blockchain qui permet à un utilisateur de soumettre le type de vaccin qu'il a pris selon la compagnie approprié. La compagnie est une organisation qui offre aux voters de se faire vacciner avec seulement un type de vaccin. Celle-ci doit soumettre un formulaire dans l'application pour être valide. Le formulaire comprend le nom de la compagnie ainsi qu'un type de vaccin qu'elle offre. Le voter doit insérer une clé d'auhtentification qui lui a été fournie d'avance par le médecin afin qu'il puisse s'authentifier. Dans l'interface du voter, il peut soumettre son type de vaccin et aussi observer le nombre total de personnes vaccinées selon 4 catégories différentes, soit le nombre totals des personnes vaccinés dans le pays, le nonmbre des personnes vaccinés selon les 3 types de vaccins (Pfizer, Moderna et Johson) et un cumulatif de tous les vaccinés sur l'application. L'électoral est celui qui peut initier le blockchain. Il doit aussi insérer une clé d'authentification afin de s'authentifier. L'application offre une autre interface pour que n'importe qui puisse observer le blockchain de tous les vaccins. 
+Une application de technologie blockchain qui permet à un utilisateur de soumettre le type de vaccin qu'il a pris selon la compagnie approprié qui a offet. La compagnie est une organisation qui offre aux voters de se faire vacciner avec seulement un type de vaccin. Celle-ci doit soumettre un formulaire dans l'application pour être valide. Le formulaire comprend le nom de la compagnie ainsi qu'un type de vaccin qu'elle offre. Le voter doit insérer une clé d'auhtentification qui lui a été fournie d'avance par le médecin afin qu'il puisse s'authentifier. Dans l'interface du voter, il peut soumettre son type de vaccin et aussi observer le nombre total de personnes vaccinées selon 4 catégories différentes, soit le nombre totals des personnes vaccinés dans le pays, le nonmbre des personnes vaccinés selon les 3 types de vaccins (Pfizer, Moderna et Johson) et un cumulatif de tous les vaccinés sur l'application. L'électoral est celui qui peut initier le blockchain. Il doit aussi insérer une clé d'authentification afin de s'authentifier. L'application offre une autre interface pour que n'importe qui puisse observer le blockchain de tous les vaccins. L'application permet aux voters(patients) d'avoir un aperçu sur le nombre de personne qui ont pir sle vaccin sur l'application comparés aux nombre total de personnes vaccinés.
 
 ## Structure du projet
 
@@ -18,6 +18,8 @@ Une application de technologie blockchain qui permet à un utilisateur de soumet
   ViewModel:    Comprend les différentes viewModel de chaque UI.
 
 ## Diagramme de classe
+
+
 
 ## CU implémentés
 
