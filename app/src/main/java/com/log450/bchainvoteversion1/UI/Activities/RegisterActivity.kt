@@ -6,12 +6,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.log450.bchainvoteversion1.Utils.validateCredentials
 import com.log450.bchainvoteversion1.ViewModel.ViewModelRegiser
 import androidx.lifecycle.Observer
 import com.log450.bchainvoteversion1.R
 import com.log450.bchainvoteversion1.Utils.Constants.EXTRA_ID
-import com.log450.bchainvoteversion1.Utils.validateEmail
+import com.log450.bchainvoteversion1.Utils.Functions
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -40,10 +39,10 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun validateCredentials() {
-        email = validateCredentials(mEmail, true)
-        if (validateEmail(email)) {
-            password = validateCredentials(mPassword, false)
-            authenticationKey = validateCredentials(mAuthenticationKey, false)
+        email = Functions.validateCredentials(mEmail, true)
+        if (Functions.validateEmail(email)) {
+            password = Functions.validateCredentials(mPassword, false)
+            authenticationKey = Functions.validateCredentials(mAuthenticationKey, false)
 
             viewModel.createUserWithKey(authenticationKey, email, password)
             viewModel.getUserID().observe(this, Observer { it ->

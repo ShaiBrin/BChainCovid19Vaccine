@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.google.firebase.firestore.FirebaseFirestore
 import com.log450.bchainvoteversion1.R
-import com.log450.bchainvoteversion1.Utils.validateCredentials
+import com.log450.bchainvoteversion1.Utils.Functions
 import com.log450.bchainvoteversion1.ViewModel.ViewModelElectoral
 
 class ElectoralAuthentication : AppCompatActivity() {
@@ -34,7 +34,7 @@ class ElectoralAuthentication : AppCompatActivity() {
     }
 
     private fun validateCredentials() {
-        electorKey = validateCredentials(mElectorKey,false)
+        electorKey = Functions.validateCredentials(mElectorKey,false)
         viewModel.setKey(electorKey)
         viewModel.isAuthenticated().observe(this, Observer {
             if(it){

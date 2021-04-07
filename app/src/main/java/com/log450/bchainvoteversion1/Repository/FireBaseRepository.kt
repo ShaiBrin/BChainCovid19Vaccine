@@ -11,7 +11,7 @@ import com.log450.bchainvoteversion1.Actors.Voter.Voter
 import com.log450.bchainvoteversion1.Model.Block
 import com.log450.bchainvoteversion1.Model.VaccineType
 import com.log450.bchainvoteversion1.Network.VaccineAPI
-import com.log450.bchainvoteversion1.Utils.getVaccineFromApplication
+import com.log450.bchainvoteversion1.Utils.Functions
 import kotlinx.coroutines.tasks.await
 
 
@@ -249,7 +249,7 @@ class FireBaseRepository {
                     for (document in result) {
                         candidate = Candidate(
                             document.get("name").toString(),
-                            getVaccineFromApplication(document.get("vaccine").toString())
+                            Functions.getVaccineFromApplication(document.get("vaccine").toString())
                         )
                         candidatesDB.add(candidate)
                     }

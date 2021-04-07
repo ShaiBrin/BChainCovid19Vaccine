@@ -9,7 +9,8 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.log450.bchainvoteversion1.R
 import com.log450.bchainvoteversion1.Utils.Constants
-import com.log450.bchainvoteversion1.Utils.validateEmail
+import com.log450.bchainvoteversion1.Utils.Functions
+import com.log450.bchainvoteversion1.Utils.Functions.Companion.validateCredentials
 import com.log450.bchainvoteversion1.ViewModel.ViewModelLogin
 
 class LoginActivity : AppCompatActivity() {
@@ -57,9 +58,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
     private fun validateCredentials() {
-        email = com.log450.bchainvoteversion1.Utils.validateCredentials(mEmail,true)
-        if(validateEmail(email)) {
-            password = com.log450.bchainvoteversion1.Utils.validateCredentials(mPassword, false)
+        email = Functions.validateCredentials(mEmail,true)
+        if(Functions.validateEmail(email)) {
+            password = Functions.validateCredentials(mPassword, false)
         }
 
         else{

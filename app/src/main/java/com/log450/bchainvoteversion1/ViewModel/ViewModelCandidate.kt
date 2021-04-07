@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.log450.bchainvoteversion1.Model.VaccineType
 import com.log450.bchainvoteversion1.Repository.FireBaseRepository
-import com.log450.bchainvoteversion1.Utils.getVaccineFromApplication
+import com.log450.bchainvoteversion1.Utils.Functions
 import kotlinx.coroutines.Dispatchers
 
 class ViewModelCandidate: ViewModel() {
@@ -21,7 +21,7 @@ class ViewModelCandidate: ViewModel() {
 
     fun submitCandidateApplication(name:String, vaccinee: String){
         this.name = name
-        this.vaccine = getVaccineFromApplication(vaccinee)
+        this.vaccine = Functions.getVaccineFromApplication(vaccinee)
     }
 
     fun isApplicationCreated(): LiveData<Boolean> {

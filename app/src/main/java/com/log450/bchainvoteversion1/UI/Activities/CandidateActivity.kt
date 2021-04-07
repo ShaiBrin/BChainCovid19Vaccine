@@ -2,12 +2,10 @@ package com.log450.bchainvoteversion1.UI.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
 import android.widget.*
 import androidx.lifecycle.Observer
-import com.google.common.base.Functions
 import com.log450.bchainvoteversion1.R
-import com.log450.bchainvoteversion1.Utils.validateCredentials
+import com.log450.bchainvoteversion1.Utils.Functions.Companion.validateCredentials
 import com.log450.bchainvoteversion1.ViewModel.ViewModelCandidate
 
 class CandidateActivity : AppCompatActivity() {
