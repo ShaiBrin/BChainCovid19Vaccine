@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.log450.bchainvoteversion1.UI.Fragments.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_credentialsActivity"
+            app:destination="@id/credentialsActivity" />
+        <action
+            android:id="@+id/action_mainFragment_to_electoralAuthentication"
+            app:destination="@id/electoralAuthentication" />
+        <action
+            android:id="@+id/action_mainFragment_to_candidateActivity"
+            app:destination="@id/candidateActivity" />
+        <action
+            android:id="@+id/action_mainFragment_to_blockchainActivity"
+            app:destination="@id/blockchainActivity" />
+    </fragment>
+
+    <activity
+        android:id="@+id/credentialsActivity"
+        android:name="com.log450.bchainvoteversion1.UI.Activities.CredentialsActivity"
+        android:label="activity_credentials"
+        tools:layout="@layout/activity_credentials" />
+    <activity
+        android:id="@+id/electoralAuthentication"
+        android:name="com.log450.bchainvoteversion1.UI.Activities.ElectoralAuthentication"
+        android:label="activity_electoral_authentication"
+        tools:layout="@layout/activity_electoral_authentication" />
+    <activity
+        android:id="@+id/candidateActivity"
+        android:name="com.log450.bchainvoteversion1.UI.Activities.CandidateActivity"
+        android:label="activity_candidate"
+        tools:layout="@layout/activity_candidate" />
+    <activity
+        android:id="@+id/blockchainActivity"
+        android:name="com.log450.bchainvoteversion1.UI.Activities.BlockchainActivity"
+        android:label="activity_blockchain"
+        tools:layout="@layout/activity_blockchain" />
+</navigation>
