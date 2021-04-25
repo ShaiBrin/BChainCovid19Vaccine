@@ -22,8 +22,8 @@ class FragmentVoting (private val id:String): Fragment(), CandidateAdapter.OnIte
         val candidateListView = inflater.inflate(R.layout.fragment_voting, container,false) as View
 
         val recyclerView = candidateListView.findViewById(R.id.recycleCandidate) as RecyclerView
-        viewModel.getCandidates().observe(viewLifecycleOwner, Observer<List<Candidate>>{
-            recyclerView.adapter = viewModel.getCandidates().value?.let { CandidateAdapter(it as ArrayList<Candidate>, this) }
+        viewModel.getCandidates().observe(viewLifecycleOwner,{
+            recyclerView.adapter = viewModel.getCandidates().value?.let { CandidateAdapter(it, this) }
         })
         recyclerView.layoutManager = LinearLayoutManager(activity)
         viewModel.setID(id)
@@ -32,14 +32,14 @@ class FragmentVoting (private val id:String): Fragment(), CandidateAdapter.OnIte
 
 
     override fun onItemClicked(candidate: Candidate) {
-        viewModel.hasAlreadyVoted().observe(this, Observer{
+        viewModel.hasAlreadyVoted().observe(this, {
             if(!it){
                 viewModel.updateCandidate(candidate.getName())
 
                 viewModel.updateVoter(id).observe(this,  {
 
                     if(it){
-                        viewModel.hasBeenUpdate().observe(this, Observer {
+                        viewModel.hasBeenUpdate().observe(this,  {
                             if (it)
                                 Toast.makeText(
                                     requireContext(),
@@ -74,8 +74,8 @@ class FragmentVoting (private val id:String): Fragment(), CandidateAdapter.OnIte
 
     private fun castVote(){
 
-        viewModel.hasBeenAdded().observe(this, Observer {
-            it
+        viewModel.hasBeenAdded().observe(this,  {
+
         })
     }
 

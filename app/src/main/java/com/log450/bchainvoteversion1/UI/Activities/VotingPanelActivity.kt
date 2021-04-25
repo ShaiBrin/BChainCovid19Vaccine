@@ -42,13 +42,11 @@ class VotingPanelActivity : AppCompatActivity(), LocationListener {
                     R.id.StatsOptions -> {
                         loadFragment(FragmentStats(country))
                         return@setOnNavigationItemSelectedListener true
-                        finish()
                     }
 
                     R.id.voteOption -> {
                         loadFragment(FragmentVoting(id))
                         return@setOnNavigationItemSelectedListener true
-                        finish()
                     }
                 }
                 false

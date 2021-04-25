@@ -23,7 +23,7 @@ class ElectoralActivity : AppCompatActivity() {
         initBtn = findViewById(R.id.initData)
 
         startBlockchainBtn.setOnClickListener {
-            viewModel.blockChainExists().observe(this, Observer {
+            viewModel.blockChainExists().observe(this,  {
                 if(!it){
                     Toast.makeText(this, "Blockchain is starting", Toast.LENGTH_LONG).show()
                 }
@@ -35,10 +35,8 @@ class ElectoralActivity : AppCompatActivity() {
         }
 
         initBtn.setOnClickListener {
-            viewModel.hasDataBeenInitialized().observe(this, Observer {
-                it
+            viewModel.hasDataBeenInitialized().observe(this,  {
                     Toast.makeText(this, "Voters are initialized", Toast.LENGTH_LONG).show()
-
             })
         }
     }

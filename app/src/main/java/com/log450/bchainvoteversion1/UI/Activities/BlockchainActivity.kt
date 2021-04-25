@@ -30,8 +30,8 @@ class BlockchainActivity : AppCompatActivity(), LocationListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_blockchain)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerBlock)
-        viewModel.getBlockchain().observe(this, Observer {
-            recyclerView.adapter = viewModel.getBlockchain().value?.let { BlockchainAdapter(it as ArrayList<Block>, ) }
+        viewModel.getBlockchain().observe(this,  {
+            recyclerView.adapter = viewModel.getBlockchain().value?.let { BlockchainAdapter(it) }
         })
         recyclerView.layoutManager = LinearLayoutManager(this)
     }
