@@ -52,7 +52,7 @@ class RegisterActivity : AppCompatActivity() {
                         "Successfully Registered",
                         Toast.LENGTH_LONG
                     ).show()
-                    val intent = Intent(this@RegisterActivity, VotingPanelActivity::class.java)
+                    val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                     intent.putExtra(EXTRA_ID, it.toString())
                     startActivity(intent)
                     finish()

@@ -8,10 +8,24 @@
 
 
     <EditText
+        android:id="@+id/phoneNumber"
+        android:layout_width="409dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="2dp"
+        android:ems="10"
+        android:hint="Phone Number"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/authenticationKeyRegister"
+        tools:ignore="MissingConstraints"
+        tools:visibility="visible" />
+
+    <EditText
         android:id="@+id/emailRegister"
         android:layout_width="411dp"
         android:layout_height="47dp"
-        android:layout_marginTop="166dp"
+        android:layout_marginTop="100dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
@@ -54,12 +68,14 @@
         android:id="@+id/registerBtn"
         android:layout_width="139dp"
         android:layout_height="73dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="51dp"
         android:layout_marginEnd="136dp"
+        android:layout_marginBottom="68dp"
         android:text="Register"
         android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/authenticationKeyRegister"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumber"
         tools:ignore="MissingConstraints"
         tools:visibility="visible" />
 
