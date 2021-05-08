@@ -1,3 +1,9 @@
+#Functionality:
+#1. Sign in with google
+
+#2. Vaccine Passport
+
+
 # Projet de session - {bchainVersion1}
 
 ## Noms

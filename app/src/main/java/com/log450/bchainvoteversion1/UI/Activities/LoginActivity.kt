@@ -58,9 +58,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
     private fun validateCredentials() {
-        email = Functions.validateCredentials(mEmail,true)
+        email = validateCredentials(mEmail,true)
         if(Functions.validateEmail(email)) {
-            password = Functions.validateCredentials(mPassword, false)
+            password = validateCredentials(mPassword, false)
         }
 
         else{
