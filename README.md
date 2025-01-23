@@ -1,8 +1,5 @@
-#Functionality:
-#1. Sign in with google
-
-#2. Vaccine Passport
-
+## Video Demo
+[Video Demo](https://youtube.com/shorts/rNkOKR3B7Pw?feature=share)
 
 # Projet de session - {bchainVersion1}
 
